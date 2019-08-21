@@ -18,16 +18,16 @@ Open project with xcode and build framework (Product -> Archive -> Distribute Co
 import CustomCamera
 ```
 4. Create CustomCameraConfigFile and change string and icon (if defaults string and icons are not good enough)
-
-        let configFile = CustomCameraConfigFile.init()
-        configFile.holdForVideoTapForImageString = NSLocalizedString("Hold for video, tap for image", comment: "")
-
+```swift
+let configFile = CustomCameraConfigFile.init() 
+configFile.holdForVideoTapForImageString = NSLocalizedString("Hold for video, tap for image", comment: "")
+```
 5. Start CustomCamera with this methode
-
+```swift
 CustomCameraViewController.startCustomCamera(viewOrNavigationController: self, config: configFile, delegate: self)
-
+```
 6. Add CustomCameraDelegate delegate to ViewController, and add delegate methods to ViewController
-
+```swift
     func customCameraOnPermissionDenied(camera: Bool, microphone: Bool) {
         // user decline perission
     }
@@ -43,4 +43,4 @@ CustomCameraViewController.startCustomCamera(viewOrNavigationController: self, c
     func customCameraOnImage(image: UIImage, viewController: CustomCameraViewController) {
         // user take image with CustomCamera
     }
-
+```
