@@ -28,7 +28,7 @@ CustomCameraViewController.startCustomCamera(viewOrNavigationController: self, c
 ```
 6. Add CustomCameraDelegate delegate to ViewController, and add delegate methods to ViewController
 ```swift
-    func customCameraOnPermissionDenied(camera: Bool, microphone: Bool) {
+func customCameraOnPermissionDenied(camera: Bool, microphone: Bool) {
         // user decline perission
     }
 
