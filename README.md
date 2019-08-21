@@ -29,18 +29,18 @@ CustomCameraViewController.startCustomCamera(viewOrNavigationController: self, c
 6. Add CustomCameraDelegate delegate to ViewController, and add delegate methods to ViewController
 ```swift
 func customCameraOnPermissionDenied(camera: Bool, microphone: Bool) {
-        // user decline perission
-    }
+	// user decline perission
+}
 
-    func customCameraOnCancel(viewController: CustomCameraViewController) {
-        // user close CustomCamera without take picture or record video
-    }
-    
-    func customCameraOnVideo(path: String, viewController: CustomCameraViewController) {
-        // user record video with CustomCamera - path is path of video, you can set this path in config file
-    }
-    
-    func customCameraOnImage(image: UIImage, viewController: CustomCameraViewController) {
-        // user take image with CustomCamera
-    }
+func customCameraOnCancel(viewController: CustomCameraViewController) {
+	// user close CustomCamera without take picture or record video
+}
+
+func customCameraOnVideo(path: String, viewController: CustomCameraViewController) {
+	// user record video with CustomCamera - path is path of video, you can set this path in config file
+}
+
+func customCameraOnImage(image: UIImage, viewController: CustomCameraViewController) {
+	// user take image with CustomCamera
+}
 ```
