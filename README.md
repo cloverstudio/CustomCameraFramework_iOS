@@ -2,7 +2,7 @@
 
 Open project with xcode and build framework (Product -> Archive -> Distribute Content -> Built Product) or you can use framework from build folder.
 
-##Swift
+## Swift
 
 1. Add permission for camera and microphone in plist
 
