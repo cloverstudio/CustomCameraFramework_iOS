@@ -14,9 +14,9 @@ Open project with xcode and build framework (Product -> Archive -> Distribute Co
 2. Copy framework to project, and add it to Target -> General -> Embedded Binaries and Linked Frameworks and Libraries.
  
 3. Import CustomCamera to swift class where want to use CustomCamera library
-
-        import CustomCamera
-
+```swift
+import CustomCamera
+```
 4. Create CustomCameraConfigFile and change string and icon (if defaults string and icons are not good enough)
 
         let configFile = CustomCameraConfigFile.init()
