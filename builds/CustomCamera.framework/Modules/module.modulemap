@@ -1,0 +1,11 @@
+framework module CustomCamera {
+  umbrella header "CustomCamera.h"
+
+  export *
+  module * { export * }
+}
+
+module CustomCamera.Swift {
+    header "CustomCamera-Swift.h"
+    requires objc
+}
