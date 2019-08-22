@@ -427,6 +427,7 @@ open class CustomCameraViewController: CustomCameraBaseViewController, CameraFoc
         self.animateView.removeRotateAnimation()
         self.cancelVideoRecording.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
         self.lockVideoRecording.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        self.lockVideoRecording.image =  configFile?.lockOpenIcon
         self.redViewForRecording.roundView()
         self.cancelVideoRecording.animateHideWithFade(toHide: true)
         self.lockVideoRecording.animateHideWithFade(toHide: true)
