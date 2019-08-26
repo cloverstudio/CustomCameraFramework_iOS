@@ -22,6 +22,76 @@ import CustomCamera
 ```objc
 #import <CustomCamera/CustomCamera.h>
 ```
+4. Create CustomCameraConfigFile and change string and icon (if defaults string and icons are not good enough)
+##### Swift
+```swift
+let configFile = CustomCameraConfigFile.init() 
+configFile.holdForVideoTapForImageString = NSLocalizedString("Hold for video, tap for image", comment: "")
+```
+##### Objc
+```objc
+CustomCameraConfigFile *configFile = [CustomCameraConfigFile new];
+[configFile setHoldForVideoTapForImageStringWithText:NSLocalizedString(@"Hold for video, tap for image", nil)];
+```
+5. CustomCameraFramework can be started like ViewController or View. 
+### CustomCameraFramework like ViewCotroller
+5.1. Start CustomCamera with this methode
+##### Swift
+```swift
+CustomCameraViewController.startCustomCamera(viewOrNavigationController: self, config: configFile, delegate: self)
+```
+##### Objc
+```objc
+[CustomCameraViewController startCustomCameraForObjCWithViewOrNavigationController:self config:configFile delegate:self];
+```
+Native video editing can be enable in ConfigFile. This feature is only available if CustomCameraFramework is started like ViewController.
+##### Swift
+```swift
+config.editVideoEnabled = true
+config.setEditVideoQuality(quality: .typeHigh)
+```
+##### Objc
+```objc
+[file setEditVideoEnabledWithEnabled:NO];
+[file setEditVideoQualityWithQuality:UIImagePickerControllerQualityTypeHigh]
+```
+5.2. Add CustomCameraDelegate delegate to ViewController, and add delegate methods to ViewController
+##### Swift
+```swift
+func customCameraOnPermissionDenied(camera: Bool, microphone: Bool) {
+	// user decline perission
+}
+
+func customCameraOnCancel(viewController: CustomCameraViewController) {
+	// user close CustomCamera without take picture or record video
+}
+
+func customCameraOnVideo(path: String, viewController: CustomCameraViewController) {
+	// user record video with CustomCamera - path is path of video, you can set this path in config file
+}
+
+func customCameraOnImage(image: UIImage, viewController: CustomCameraViewController) {
+	// user take image with CustomCamera
+}
+```
+##### Objc
+```objc
+-(void)customCameraOnPermissionDeniedWithCamera:(BOOL)camera microphone:(BOOL)microphone{
+	// user decline perission
+}
+
+-(void)customCameraOnCancelWithViewController:(CustomCameraViewController *)viewController{
+	// user close CustomCamera without take picture or record video
+}
+
+-(void)customCameraOnVideoWithPath:(NSString *)path viewController:(CustomCameraViewController *)viewController{
+	// user record video with CustomCamera - path is path of video, you can set this path in config file
+}
+
+-(void)customCameraOnImageWithImage:(UIImage *)image viewController:(CustomCameraViewController *)viewController{
+	// user take image with CustomCamera
+}
+```
 
 ## Swift
 
