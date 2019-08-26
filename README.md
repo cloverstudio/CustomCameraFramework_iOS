@@ -14,11 +14,11 @@ Open project with xcode and build framework (Product -> Archive -> Distribute Co
 2. Copy framework to project, and add it to Target -> General -> Embedded Binaries and Linked Frameworks and Libraries.
 
 3. Import CustomCamera to swift class where want to use CustomCamera library
-#### Swift
+##### Swift
 ```swift
 import CustomCamera
 ```
-####Objc
+##### Objc
 ```objc
 #import <CustomCamera/CustomCamera.h>
 ```
