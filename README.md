@@ -92,7 +92,7 @@ func customCameraOnImage(image: UIImage, viewController: CustomCameraViewControl
 	// user take image with CustomCamera
 }
 ```
-#### CustomCameraFramework like ViewCotroller
+#### CustomCameraFramework like View
 5.1. Add subview to view with this method (view is parent view for CustomCameraView)
 ##### Swift
 ```swift
