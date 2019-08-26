@@ -2,6 +2,27 @@
 
 Open project with xcode and build framework (Product -> Archive -> Distribute Content -> Built Product) or you can use framework from build folder.
 
+## Use CustomCameraFramework
+
+1. Add permission for camera and microphone in plist
+```xml
+<key>NSCameraUsageDescription</key>
+<string>$(PRODUCT_NAME) uses camera for ...</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>$(PRODUCT_NAME) record video and audio</string>
+```
+2. Copy framework to project, and add it to Target -> General -> Embedded Binaries and Linked Frameworks and Libraries.
+
+3. Import CustomCamera to swift class where want to use CustomCamera library
+#### Swift
+```swift
+import CustomCamera
+```
+####Objc
+```objc
+#import <CustomCamera/CustomCamera.h>
+```
+
 ## Swift
 
 1. Add permission for camera and microphone in plist
