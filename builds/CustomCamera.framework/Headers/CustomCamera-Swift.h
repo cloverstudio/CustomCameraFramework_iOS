@@ -168,6 +168,8 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import CoreGraphics;
+@import Foundation;
 @import ObjectiveC;
 @import UIKit;
 #endif
@@ -187,8 +189,15 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class NSBundle;
 @class NSCoder;
+
+SWIFT_CLASS("_TtC12CustomCamera12CSCustomView")
+@interface CSCustomView : UIView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class NSBundle;
 
 SWIFT_CLASS("_TtC12CustomCamera30CustomCameraBaseViewController")
 @interface CustomCameraBaseViewController : UIViewController
@@ -210,6 +219,8 @@ SWIFT_CLASS("_TtC12CustomCamera22CustomCameraConfigFile")
 - (void)setLockOpenIconWithImage:(UIImage * _Nonnull)image;
 - (void)setLockCloseIconWithImage:(UIImage * _Nonnull)image;
 - (void)setTapStopButtonToStopRecordingStringWithText:(NSString * _Nonnull)text;
+- (void)setEditVideoEnabledWithEnabled:(BOOL)enabled;
+- (void)setEditVideoQualityWithQuality:(UIImagePickerControllerQualityType)quality;
 @end
 
 @class CustomCameraViewController;
@@ -219,17 +230,50 @@ SWIFT_PROTOCOL("_TtP12CustomCamera20CustomCameraDelegate_")
 - (void)customCameraOnCancelWithViewController:(CustomCameraViewController * _Nonnull)viewController;
 - (void)customCameraOnPermissionDeniedWithCamera:(BOOL)camera microphone:(BOOL)microphone;
 - (void)customCameraOnImageWithImage:(UIImage * _Nonnull)image viewController:(CustomCameraViewController * _Nonnull)viewController;
-- (void)customCameraOnVideoWithPath:(NSString * _Nonnull)path viewController:(CustomCameraViewController * _Nonnull)viewController;
+- (void)customCameraOnVideoWithUrlPath:(NSURL * _Nonnull)urlPath viewController:(CustomCameraViewController * _Nonnull)viewController;
+@end
+
+@protocol CustomCameraViewDelegate;
+
+SWIFT_CLASS("_TtC12CustomCamera16CustomCameraView")
+@interface CustomCameraView : CSCustomView
++ (void)startCustomCameraInViewForObjCWithView:(UIView * _Nonnull)view config:(CustomCameraConfigFile * _Nonnull)config delegate:(id <CustomCameraViewDelegate> _Nonnull)delegate animate:(BOOL)animate;
+- (void)setCustomConfigFileWithConfigFile:(CustomCameraConfigFile * _Nonnull)configFile;
+- (void)setCustomCameraViewDelegateWithDelegate:(id <CustomCameraViewDelegate> _Nonnull)delegate;
+- (void)layoutSubviews;
+- (void)closeWithAnimation;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
+SWIFT_PROTOCOL("_TtP12CustomCamera24CustomCameraViewDelegate_")
+@protocol CustomCameraViewDelegate
+- (void)customCameraViewOnCancelWithView:(CustomCameraView * _Nonnull)view;
+- (void)customCameraViewOnPermissionDeniedWithCamera:(BOOL)camera microphone:(BOOL)microphone;
+- (void)customCameraViewOnImageWithImage:(UIImage * _Nonnull)image view:(CustomCameraView * _Nonnull)view;
+- (void)customCameraViewOnVideoWithUrlPath:(NSURL * _Nonnull)urlPath view:(CustomCameraView * _Nonnull)view;
+@end
+
+@class UIVideoEditorController;
+
 SWIFT_CLASS("_TtC12CustomCamera26CustomCameraViewController")
-@interface CustomCameraViewController : CustomCameraBaseViewController
+@interface CustomCameraViewController : CustomCameraBaseViewController <CustomCameraViewDelegate, UINavigationControllerDelegate, UIVideoEditorControllerDelegate>
 + (void)startCustomCameraForObjCWithViewOrNavigationController:(id _Nonnull)viewOrNavigationController config:(CustomCameraConfigFile * _Nonnull)config delegate:(id <CustomCameraDelegate> _Nonnull)delegate;
 - (void)viewDidLoad;
+- (void)customCameraViewOnImageWithImage:(UIImage * _Nonnull)image view:(CustomCameraView * _Nonnull)view;
+- (void)customCameraViewOnVideoWithUrlPath:(NSURL * _Nonnull)urlPath view:(CustomCameraView * _Nonnull)view;
+- (void)customCameraViewOnPermissionDeniedWithCamera:(BOOL)camera microphone:(BOOL)microphone;
+- (void)customCameraViewOnCancelWithView:(CustomCameraView * _Nonnull)view;
+- (void)viewWillDisappear:(BOOL)animated;
+- (void)viewWillAppear:(BOOL)animated;
+- (void)videoEditorControllerDidCancel:(UIVideoEditorController * _Nonnull)editor;
+- (void)videoEditorController:(UIVideoEditorController * _Nonnull)editor didFailWithError:(NSError * _Nonnull)error;
+- (void)videoEditorController:(UIVideoEditorController * _Nonnull)editor didSaveEditedVideoToPath:(NSString * _Nonnull)editedVideoPath;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 
@@ -407,6 +451,8 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import CoreGraphics;
+@import Foundation;
 @import ObjectiveC;
 @import UIKit;
 #endif
@@ -426,8 +472,15 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class NSBundle;
 @class NSCoder;
+
+SWIFT_CLASS("_TtC12CustomCamera12CSCustomView")
+@interface CSCustomView : UIView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class NSBundle;
 
 SWIFT_CLASS("_TtC12CustomCamera30CustomCameraBaseViewController")
 @interface CustomCameraBaseViewController : UIViewController
@@ -449,6 +502,8 @@ SWIFT_CLASS("_TtC12CustomCamera22CustomCameraConfigFile")
 - (void)setLockOpenIconWithImage:(UIImage * _Nonnull)image;
 - (void)setLockCloseIconWithImage:(UIImage * _Nonnull)image;
 - (void)setTapStopButtonToStopRecordingStringWithText:(NSString * _Nonnull)text;
+- (void)setEditVideoEnabledWithEnabled:(BOOL)enabled;
+- (void)setEditVideoQualityWithQuality:(UIImagePickerControllerQualityType)quality;
 @end
 
 @class CustomCameraViewController;
@@ -458,17 +513,50 @@ SWIFT_PROTOCOL("_TtP12CustomCamera20CustomCameraDelegate_")
 - (void)customCameraOnCancelWithViewController:(CustomCameraViewController * _Nonnull)viewController;
 - (void)customCameraOnPermissionDeniedWithCamera:(BOOL)camera microphone:(BOOL)microphone;
 - (void)customCameraOnImageWithImage:(UIImage * _Nonnull)image viewController:(CustomCameraViewController * _Nonnull)viewController;
-- (void)customCameraOnVideoWithPath:(NSString * _Nonnull)path viewController:(CustomCameraViewController * _Nonnull)viewController;
+- (void)customCameraOnVideoWithUrlPath:(NSURL * _Nonnull)urlPath viewController:(CustomCameraViewController * _Nonnull)viewController;
+@end
+
+@protocol CustomCameraViewDelegate;
+
+SWIFT_CLASS("_TtC12CustomCamera16CustomCameraView")
+@interface CustomCameraView : CSCustomView
++ (void)startCustomCameraInViewForObjCWithView:(UIView * _Nonnull)view config:(CustomCameraConfigFile * _Nonnull)config delegate:(id <CustomCameraViewDelegate> _Nonnull)delegate animate:(BOOL)animate;
+- (void)setCustomConfigFileWithConfigFile:(CustomCameraConfigFile * _Nonnull)configFile;
+- (void)setCustomCameraViewDelegateWithDelegate:(id <CustomCameraViewDelegate> _Nonnull)delegate;
+- (void)layoutSubviews;
+- (void)closeWithAnimation;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
+SWIFT_PROTOCOL("_TtP12CustomCamera24CustomCameraViewDelegate_")
+@protocol CustomCameraViewDelegate
+- (void)customCameraViewOnCancelWithView:(CustomCameraView * _Nonnull)view;
+- (void)customCameraViewOnPermissionDeniedWithCamera:(BOOL)camera microphone:(BOOL)microphone;
+- (void)customCameraViewOnImageWithImage:(UIImage * _Nonnull)image view:(CustomCameraView * _Nonnull)view;
+- (void)customCameraViewOnVideoWithUrlPath:(NSURL * _Nonnull)urlPath view:(CustomCameraView * _Nonnull)view;
+@end
+
+@class UIVideoEditorController;
+
 SWIFT_CLASS("_TtC12CustomCamera26CustomCameraViewController")
-@interface CustomCameraViewController : CustomCameraBaseViewController
+@interface CustomCameraViewController : CustomCameraBaseViewController <CustomCameraViewDelegate, UINavigationControllerDelegate, UIVideoEditorControllerDelegate>
 + (void)startCustomCameraForObjCWithViewOrNavigationController:(id _Nonnull)viewOrNavigationController config:(CustomCameraConfigFile * _Nonnull)config delegate:(id <CustomCameraDelegate> _Nonnull)delegate;
 - (void)viewDidLoad;
+- (void)customCameraViewOnImageWithImage:(UIImage * _Nonnull)image view:(CustomCameraView * _Nonnull)view;
+- (void)customCameraViewOnVideoWithUrlPath:(NSURL * _Nonnull)urlPath view:(CustomCameraView * _Nonnull)view;
+- (void)customCameraViewOnPermissionDeniedWithCamera:(BOOL)camera microphone:(BOOL)microphone;
+- (void)customCameraViewOnCancelWithView:(CustomCameraView * _Nonnull)view;
+- (void)viewWillDisappear:(BOOL)animated;
+- (void)viewWillAppear:(BOOL)animated;
+- (void)videoEditorControllerDidCancel:(UIVideoEditorController * _Nonnull)editor;
+- (void)videoEditorController:(UIVideoEditorController * _Nonnull)editor didFailWithError:(NSError * _Nonnull)error;
+- (void)videoEditorController:(UIVideoEditorController * _Nonnull)editor didSaveEditedVideoToPath:(NSString * _Nonnull)editedVideoPath;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 

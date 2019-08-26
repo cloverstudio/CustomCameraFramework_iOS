@@ -29,6 +29,9 @@ class CameraController: NSObject, AVCaptureFileOutputRecordingDelegate {
     var rearCamera: AVCaptureDevice?
     var rearCameraInput: AVCaptureDeviceInput?
     
+    var captureAudio: AVCaptureDevice?
+    var captureAudioInput: AVCaptureDeviceInput?
+    
     var previewLayer: AVCaptureVideoPreviewLayer?
     
     var flashMode = AVCaptureDevice.FlashMode.auto
@@ -36,7 +39,7 @@ class CameraController: NSObject, AVCaptureFileOutputRecordingDelegate {
     
     var currentZoom = 1.0 as CGFloat
     
-    var delegate: CameraControllerDelegate?
+    weak var delegate: CameraControllerDelegate?
     var maxVideo = 60
     var videoFilePath: String?
     
@@ -75,6 +78,15 @@ extension CameraController {
                     camera.unlockForConfiguration()
                 }
             }
+            
+            let sessionAudio = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInMicrophone], mediaType: AVMediaType.audio, position: .unspecified)
+            for audio in sessionAudio.devices {
+                if audio.hasMediaType(.audio){
+                    self.captureAudio = audio
+                    break
+                }
+            }
+            
         }
         
         func configureDeviceInputs() throws {
@@ -95,6 +107,12 @@ extension CameraController {
                 else { throw CameraControllerError.inputsAreInvalid }
                 
                 self.currentCameraPosition = .front
+            }
+            
+            self.captureAudioInput = try AVCaptureDeviceInput(device: self.captureAudio!)
+            
+            if self.captureAudioInput != nil && captureSession.canAddInput(self.captureAudioInput!){
+                captureSession.addInput(self.captureAudioInput!)
             }
                 
             else { throw CameraControllerError.noCamerasAvailable }
@@ -188,6 +206,7 @@ extension CameraController {
             else {
                 throw CameraControllerError.invalidOperation
             }
+            
         }
         
         func switchToRearCamera() throws {

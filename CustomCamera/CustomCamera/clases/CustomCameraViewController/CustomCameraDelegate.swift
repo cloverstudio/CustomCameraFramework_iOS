@@ -13,5 +13,5 @@ import UIKit
     func customCameraOnCancel(viewController: CustomCameraViewController)
     func customCameraOnPermissionDenied(camera: Bool, microphone: Bool)
     func customCameraOnImage(image: UIImage, viewController: CustomCameraViewController)
-    func customCameraOnVideo(path: String, viewController: CustomCameraViewController)
+    func customCameraOnVideo(urlPath: URL, viewController: CustomCameraViewController)
 }

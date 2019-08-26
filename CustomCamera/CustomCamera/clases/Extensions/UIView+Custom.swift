@@ -24,6 +24,9 @@ extension UIView{
     var heightOfView: CGFloat{
         return self.frame.size.height
     }
+    var widthOfView: CGFloat{
+        return self.frame.size.width
+    }
     
     func hideView(){
         self.isHidden = true

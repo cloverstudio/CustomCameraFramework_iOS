@@ -150,5 +150,5 @@ class CameraFocusableView: UIView {
             imageViewForFocus.image = nil
         }
     }
-
+    
 }

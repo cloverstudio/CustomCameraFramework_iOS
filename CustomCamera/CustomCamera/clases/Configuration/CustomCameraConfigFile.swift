@@ -23,6 +23,8 @@ open class CustomCameraConfigFile: NSObject{
     public var videoPath: String?
     public var lockOpenIcon: UIImage?
     public var lockCloseIcon: UIImage?
+    public var editVideoEnabled: Bool?
+    public var editVideoQuality: UIImagePickerController.QualityType?
     
     public override init() {
         let storyboardBundle = Bundle(for: type(of: self))
@@ -38,6 +40,8 @@ open class CustomCameraConfigFile: NSObject{
         self.lockOpenIcon = UIImage.init(named: "ic_lock_open", in: storyboardBundle, compatibleWith: nil)
         self.lockCloseIcon = UIImage.init(named: "ic_lock_close", in: storyboardBundle, compatibleWith: nil)
         self.maxVideoDuration = 60
+        self.editVideoEnabled = false
+        self.editVideoQuality = .typeHigh
     }
     
     @objc public func setHoldForVideoTapForImageString(text: String){
@@ -74,6 +78,14 @@ open class CustomCameraConfigFile: NSObject{
     
     @objc public func setTapStopButtonToStopRecordingString(text: String){
         self.tapStopButtonToStopRecordingString = text
+    }
+    
+    @objc public func setEditVideoEnabled(enabled: Bool){
+        self.editVideoEnabled = enabled
+    }
+    
+    @objc public func setEditVideoQuality(quality: UIImagePickerController.QualityType){
+        self.editVideoQuality = quality
     }
     
 }
